@@ -1,0 +1,123 @@
+OOD Assignment 6
+By: Nelson Dong and Shannon Assouline
+
+To run our program:
+To Load:
+- Select the dropdown menu in the console of the GUI and select 'load' to load an image
+- Select an image to load from the file navigator box directly to the right and type the name you
+want to load it as and click submit
+To Save:
+- Select the dropdown menu in the console of the GUI and select 'save' to save an image
+- Select 'Save to' and navigate to where you want to save the image. Select from the dropdown menu
+to the right which image to save and click submit
+To Brighten or Darken:
+- Select 'brighten' from the dropdown menu in the console and input the amount you want to
+brighten the image by in the box directly to the right. Insert a negative number if you want to
+darken the image
+- Specify the version you want to apply the brighten or darken to and the name you want to store this
+brightened or darkened version as
+- Click Submit
+To Greyscale:
+- Select 'component' from the dropdown menu in the console. Select if you want to a greyscale of
+ the red, green, blue, value, or intensity component of the image from the dropdown menu box
+ directly to the right.
+- Specify the version you want to apply the greyscale to and the name you want to store this
+greyscaled version as
+- Click Submit
+To Sepia filter:
+- Select 'sepia' from the dropdown menu in the console
+- Specify the version you want to apply the sepia to and the name you want to store this sepia
+ version as
+- Click Submit
+To Luma filter:
+- Select 'luma' from the dropdown menu in the console
+- Specify the version you want to apply the luma to and the name you want to store this luma
+ version as
+- Click Submit
+To Flip:
+- Select 'flip' from the dropdown menu in the console. Select if you want to vertical flip or
+horizontal flip in the dropdown menu box directly to the right.
+- Specify the version you want to apply the flip to and the name you want to store this flipped
+ version as
+- Click Submit
+To Blur:
+- Select 'blur' from the dropdown menu in the console
+- Specify the version you want to apply the blur to and the name you want to store this blurred
+ version as
+- Click Submit
+To Sharpen:
+- Select 'sharpen' from the dropdown menu in the console
+- Specify the version you want to apply the sharpen to and the name you want to store this sharpen
+ version as
+- Click Submit
+
+--------------------------------------------------------------------------------------------------
+
+OOD Assignment 5
+By: Nelson Dong and Shannon Assouline
+
+To run our program, first load the image. Input command 'load', a space, the file path of the image
+you want to load, insert another space, and then input the name you want to load the image under.
+
+Then input the type of transformation you want to apply on the image. Can be one of:
+brighten, red-component, green-component, blue-component, value-component, intensity-component,
+luma-component, sharpen, sepia, blur, horizontal-flip, vertical-flip.
+After specifying the type of transformation, input the name of the image you want to apply the
+transformation to, insert a space, and then input the name that the new image should be called. An
+example of how to format commands is shown below.
+
+To save this new image created by the transformation, input command 'save', a space, the file path
+of where you want the image to save, insert another space, and then input the name of the image
+to save. You can also use save to convert from one image file format to another, as shown below.
+
+Note: For only the brighten command, before specifying the name of the image you want to apply
+the transformation to, you must input how much you want to brighten the image. This will be a
+number. A positive number brightens an image and a negative number darkens an image.
+
+--------------------------
+Script Commands Supported:
+brighten increment image-name dest-image-name
+red-component image-name dest-image-name
+green-component image-name dest-image-name
+blue-component image-name dest-image-name
+value-component image-name dest-image-name
+intensity-component image-name dest-image-name
+luma-component image-name dest-image-name
+sharpen image-name dest-image-name
+sepia image-name dest-image-name
+load image-path image-name
+save image-path image-name
+blur image-name dest-image-name
+horizontal-flip image-name dest-image-name
+vertical-flip image-name dest-image-name
+
+Example of Using Script Commands:
+load ./res/tomato/tomato.ppm tomato
+brighten 50 tomato tomato-brighten
+brighten -50 tomato tomato-darken
+red-component tomato tomato-red
+green-component tomato tomato-green
+blue-component tomato tomato-blue
+value-component tomato tomato-value
+intensity-component tomato tomato-intensity
+luma-component tomato tomato-luma
+sharpen tomato tomato-sharpen
+sepia tomato tomato-sepia
+blur tomato tomato-blur
+horizontal-flip tomato tomato-horizontal-flip
+vertical-flip tomato tomato-vertical-flip
+save ./res/tomato/tomato-brighten.ppm tomato-brighten
+save ./res/tomato/tomato-darken.ppm tomato-darken
+save ./res/tomato/tomato-red.png tomato-red
+save ./res/tomato/tomato-green.png tomato-green
+save ./res/tomato/tomato-blue.png tomato-blue
+save ./res/tomato/tomato-value.jpeg tomato-value
+save ./res/tomato/tomato-intensity.jpeg tomato-intensity
+save ./res/tomato/tomato-luma.jpeg tomato-luma
+save ./res/tomato/tomato-sharpen.ppm tomato-sharpen
+save ./res/tomato/tomato-sepia.ppm tomato-sepia
+save ./res/tomato/tomato-blur.ppm tomato-blur
+save ./res/tomato/tomato-horizontal-flip.png tomato-horizontal-flip
+save ./res/tomato/tomato-vertical-flip.jpeg tomato-vertical-flip
+save ./res/tomato/tomato.png tomato
+save ./res/tomato/tomato.jpeg tomato

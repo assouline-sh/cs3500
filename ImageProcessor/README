@@ -1,0 +1,153 @@
+OOD Assignment 6
+By: Nelson Dong and Shannon Assouline
+Test Image: tomato.jpg from Amirali Mirhashemian and is free to use under the Unsplash License
+Find the Image Here: https://unsplash.com/photos/cRNUvWM9l_I
+Updated From Assignment 5
+
+For this assignment, we made two main updates:
+1) New class, SwingFrame, in the view which builds the GUI view for users to see and interact with.
+2) New class, Histogram, in the view that renders a histogram of the red, green, and blue
+   components of an image. Accordingly, this relies on new methods that were added to the Image
+   class which create a HashMap of the red, green, and blue components of an image.
+All other features in our original program have been maintained.
+
+1) The SwingFrame class renders a graphical view of our image processing program for users to
+interact with. It shows the available commands to perform image manipulations, the original image
+and the image after a manipulation, a histogram of the red, green, and blue components of the
+'before' and 'after' image, and the versions that have been saved so far. A user can load an image.
+When a user interacts with the GUI and selects a particular image manipulation, it is executed on
+the image. Multiple image manipulations can be done on the same image. The user can then save the
+image if desired. This SwingFrame class also implements our IView interface we had written
+previously, thus seamlessly integrating into our existing code.
+2) To generate a histogram for our GUI, we created a Histogram class in the view. This class
+overrides the paintComponent() method to render a histogram of the red, green, and blue color
+components of an image. It calls three methods in the Image class which we also added. Each of these
+methods gets the distribution of the red, green, and blue components in an image, for the
+histogram to use in graphing.
+All other design in our original program has been maintained.
+
+How to use our program:
+Our program can be used by going to Run, Edit Configurations, and entering 'ImageUtil' in the box
+for the Main Class.
+If you want to run the GUI, enter nothing in the Program Arguments.
+If you want to run a script file, add "-file" and the path of the script file to the Program
+Arguments.
+If you want to run the interactive text mode, add "-text" to the Program Arguments.
+Hit Apply and run the program.
+
+--------------------------------------------------------------------------------------------------
+
+OOD Assignment 5
+By: Nelson Dong and Shannon Assouline
+Test Image: tomato.jpg from Amirali Mirhashemian and is free to use under the Unsplash License
+Find the Image Here: https://unsplash.com/photos/cRNUvWM9l_I
+Updated From Assignment 4
+
+For this assignment, we made three main updates:
+1) Support for other image file formats, including png and jpeg
+2) Ability to blur and sharpen an image
+3) Ability to apply a Sepia filter to an image
+All other features in our original program have been maintained.
+
+1) To add support for other image file formats, we simply added two additional methods to our
+ReadUtil class; one method to read any given image file that is not a ppm file, and one method
+to convert given pixels to any image file format. Having a ReadUtil class helped maintain
+organization and readability when extending our program to support other image file formats.
+2) Blurring and sharpening an image involve the same mathematical calculations on matrices; the
+only difference is the content of the matrix. Thus, both of these transformations were combined
+under the same command "Filter" since the similarity in calculations means that their code is
+highly similar. To add this functionality, we created a new Filter class that implements
+the Commands interface and calls the filter() method in the model to perform the calculations.
+3) Applying a sepia filter to an image involves the same mathematical calculations on matrices
+as the luma transformation we implemented in the last assignment; the only difference is the
+content of the matrix. Thus, both of these transformations were combined under the same command
+"TransformColor" since the similarity in calculations means that their code is highly similar. To
+add this functionality, we created a new TransformColor class that implements the Commands
+interface and calls the transformColor() method in the model to perform the calculations.
+All other design in our original program has been maintained.
+
+--------------------------------------------------------------------------------------------------
+
+OOD Assignment 4
+By: Nelson Dong and Shannon Assouline
+Test Image: tomato.jpg from Amirali Mirhashemian and is free to use under the Unsplash License
+Find the Image Here: https://unsplash.com/photos/cRNUvWM9l_I
+
+--------------------------
+How to Run a Script Using Our Program:
+Option 1) Run the ImageUtil class main method and copy/ paste the following commands in the console
+          Note: you will need to hit Enter to execute the last image command
+Option 2) Run -> Edit Configurations -> New Application Configuration
+          Name the configuration, enter ImageUtil in Main Class field, and enter ./script.txt in
+          Program Arguments field
+
+Example Script of Commands our Program Accepts:
+load ./res/tomato/tomato.ppm tomato
+save ./res/tomato/tomatoSave.ppm tomato
+
+brighten 50 tomato tomato-brighter
+save ./res/tomato/tomato-brighter.ppm tomato-brighter
+
+brighten -50 tomato tomato-darker
+save ./res/tomato/tomato-darker.ppm tomato-darker
+
+horizontal-flip tomato horizontal-tomato
+save ./res/tomato/horizontal-tomato.ppm horizontal-tomato
+
+vertical-flip horizontal-tomato vertical-horizontal-tomato
+save ./res/tomato/vertical-horizontal-tomato.ppm vertical-horizontal-tomato
+
+blue-component tomato tomato-blue
+save ./res/tomato/tomato-blue.ppm tomato-blue
+
+luma-component tomato tomato-luma
+save ./res/tomato/tomato-luma.ppm tomato-luma
+
+intensity-component horizontal-tomato intensity-horizontal-tomato
+save ./res/tomato/intensity-horizontal-tomato.ppm intensity-horizontal-tomato
+--------------------------
+
+In the design of our program, we have categorized all of our classes and interfaces into packages
+of either a controller, mock, or a view because we wanted to adhere to the MVC design. We also have
+a package called readfiles which contains a singular class of ReadUtil. This class currently only
+has one method that reads and parses the given ppm image information, but can be easily added onto
+to support reading and parsing other image file formats. We also have one more class that does not
+fit into the MVC packages, which is the ImageUtil class where we run the main method.
+
+Let's begin with our Controller package and its two components: an interface IController and a class
+that implements this interface ControllerImpl. We define a controller interface in case we want to
+create new or different controllers in the future, and we promise that any future controller should
+have a go() method to run the controller / program, getCommandList() to get the available commands
+the user can use. We then implement this interface in our ControllerImpl class where we initialize
+a list of the commands available to the user and run the program, as well as implement the other
+methods promised in the interface.
+To support all the commands for image manipulation, we used the Command Design Pattern to
+increase cohesion and promote delegation in our code. We have a Commands interface that unifies all
+commands with the same signature: a void method called go() that executes the command on
+the given image. All commands that users can do are individual classes that implement Commands.
+Our controller is thus simplified and more cohesive because it takes in a command from the user,
+creates the corresponding Command object, and then executes the command object.
+
+Moving on to our Model, we have a package called Image which has the classes Image and Pixel. Pixel
+represents an individual Pixel and holds information like its position and color. Pixel contains
+methods to easily change its fields, which is important when manipulating images and their
+individual pixels. An Image has two fields: a name and all its pixels represented as an
+ArrayList<ArrayList<Pixel>>. We chose this representation because ArrayLists are flexible in size,
+so we can easily support images of any size. It also makes it easy to get a pixel at a particular
+location, iterate through the rows and columns of pixels in an image, and change the value of a
+pixel if needed. We have included methods to get certain properties of the Image object, as well as
+creating a copy of its ArrayList<ArrayList<Pixel>>. This is so that when we are manipulating an
+image, we do not mutate the original image but instead a new image which originally has the same
+properties as the original image.
+We also have an interface IModel that promises the image model should support the commands save,
+load, horizontal and vertical flip, brighten or darken, and greyscale, as well as gets all the
+versions of the image. (Versions are created and saved after an image is manipulated into a new
+image). If in the future we want an image to perform these commands differently, the IModel
+interface can be easily implemented. Our ModelImpl class implements IModel and  details how to
+execute the commands.
+
+Finally, our view contains an IView interface and a ViewImpl class that implements this interface.
+The IView promises that any view will be able to render a given message, render the commands
+available to the user, and render the versions of an image created thus far. Extending different
+kinds of view with this interface is eased. Our ViewImpl class fulfills these promised methods by
+rendering a message to the user and the commands available.
